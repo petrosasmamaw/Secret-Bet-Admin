@@ -44,7 +44,7 @@ const Deposit = () => {
 
   return (
     <div className="page">
-      <h1 className="page-header">Deposit <span>Management</span></h1>
+      <h1 className="page-header">Deposits <span>Management</span></h1>
       <p className="page-description">Manage all user deposits.</p>
       {error && <p className="error">{typeof error === 'string' ? error : error.message || 'An error occurred'}</p>}
       {loading ? (
