@@ -12,6 +12,7 @@ export default function Bets({ user }) {
   const { items: bets, loading, error } = useSelector(s => s.bets);
   const [editing, setEditing] = useState(null);
   const [editData, setEditData] = useState({ possibleWin: '', isAccepted: false, status: 'pending' });
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => { dispatch(fetchBets()); }, [dispatch]);
 
@@ -121,7 +122,19 @@ export default function Bets({ user }) {
           .map(bet => (
           <div key={bet._id || bet.id} className="bet-item">
             <div className="bet-info">
-              <p><strong>Prediction:</strong> {bet.prediction}</p>
+              {Array.isArray(bet.images) && bet.images.length > 0 && (
+                <div className="bet-images">
+                  {bet.images.map((imgUrl, idx) => (
+                    <img
+                      key={idx}
+                      src={imgUrl}
+                      alt={`Bet ${bet._id || bet.id} image ${idx + 1}`}
+                      className="bet-image"
+                      onClick={() => setSelectedImage(imgUrl)}
+                    />
+                  ))}
+                </div>
+              )}
               <p><strong>Amount:</strong> ${bet.amount}</p>
               <p><strong>Possible Win:</strong> ${bet.possibleWin}</p>
               <p><strong>Accepted:</strong> {bet.isAccepted ? 'Yes' : 'No'}</p>
@@ -169,6 +182,21 @@ export default function Bets({ user }) {
           </div>
         ))}
       </div>
+
+      {selectedImage && (
+        <div className="image-modal" onClick={() => setSelectedImage(null)}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="image-modal-close"
+              onClick={() => setSelectedImage(null)}
+            >
+              &times;
+            </button>
+            <img src={selectedImage} alt="Bet" className="image-modal-img" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
