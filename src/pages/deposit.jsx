@@ -6,6 +6,7 @@ import { fetchBalancesBySupabaseId, createBalance, updateBalance } from '../Slic
 const Deposit = () => {
   const dispatch = useDispatch();
   const { items: deposits, loading, error } = useSelector(state => state.deposits);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     dispatch(fetchDeposits());
@@ -56,6 +57,7 @@ const Deposit = () => {
             <thead>
               <tr>
                 <th>Phone No</th>
+                <th>Image</th>
                 <th>Amount</th>
                 <th>Method</th>
                 <th>Status</th>
@@ -69,6 +71,16 @@ const Deposit = () => {
                 .map(deposit => (
                 <tr key={deposit._id}>
                   <td>{deposit.phoneNo}</td>
+                  <td>
+                    {deposit.image && (
+                      <img
+                        src={deposit.image}
+                        alt="Deposit"
+                        className="deposit-thumb"
+                        onClick={() => setSelectedImage(deposit.image)}
+                      />
+                    )}
+                  </td>
                   <td>${deposit.amount}</td>
                   <td>{deposit.method}</td>
                   <td>
@@ -90,6 +102,21 @@ const Deposit = () => {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {selectedImage && (
+        <div className="image-modal" onClick={() => setSelectedImage(null)}>
+          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              className="image-modal-close"
+              onClick={() => setSelectedImage(null)}
+            >
+              &times;
+            </button>
+            <img src={selectedImage} alt="Deposit" className="image-modal-img" />
+          </div>
         </div>
       )}
     </div>

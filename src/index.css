@@ -291,10 +291,6 @@ body {
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
-.deposits-table {
-  overflow-x: auto;
-}
-
 .deposits-table table {
   width: 100%;
   border-collapse: collapse;
@@ -318,6 +314,16 @@ body {
 
 .deposits-table td {
   color: #fff;
+}
+
+.deposit-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .withdrawals-table {
