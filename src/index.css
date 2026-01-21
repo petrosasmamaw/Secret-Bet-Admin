@@ -246,7 +246,7 @@ body {
 
 /* Button styles */
 .btn {
-  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  background: linear-gradient(45deg, #007bff, #00b4ff);
   color: #fff;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -773,11 +773,11 @@ body {
 }
 
 .delete-btn {
-  background: linear-gradient(45deg, #ff4444, #cc0000);
+  background: linear-gradient(45deg, #0056b3, #00408f);
 }
 
 .delete-btn:hover {
-  background: linear-gradient(45deg, #cc0000, #aa0000);
+  background: linear-gradient(45deg, #00408f, #00346f);
 }
 
 .image-modal {
